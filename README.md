@@ -49,6 +49,12 @@ https://docs.docker.com/compose/install/
 
 > 좀 어려울 수도 있으니 여러번 해보시고 잘 안되면 구글링 하심이 정신건강에 이롭긴 합니다 ㅜㅜ
 
+1. `$ vi ./data/nginx/conf.d/app.conf` : http 설정
+2. `$ docker-compose up -d` : nginx, certbot 기동
+3. `$ ./init-letsencrypt.sh` : 인증서 생성
+4. `$ vi ./data/nginx/conf.d/app.conf` http, https 설정
+5. `$ docker-compose restart` nginx 기동 ( certbot 부분은 주석처리 해도 됨 optional )
+
 ### 1. 폴더 생성 및 파일 작성
 
 폴더 생성
@@ -78,3 +84,8 @@ __ __ L conf
 `docker-compose.yml` 파일이 있는 경로에서 `docker-compose up -d` 수행 (백그라운드 기동)
 
 추후 인증서 기간이 만료 되면 2, 3 항목을 순서대로 실행한다
+
+## temp 파일
+
+> 폴더 구성을 하는 용도로 만듬
+> 최초 폴더를 만들면서 `/etc/letsencrypt/options-ssl-nginx.conf` 와 같은 파일을 생성하는데 최초 폴더가 없는 경우에는 해당 파일을 만들면서 오류가 발생됨에 유의
